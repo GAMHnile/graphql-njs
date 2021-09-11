@@ -41,16 +41,19 @@ const addNewProduct = (id, description, price) => {
 };
 
 const addNewProductReview = (productId, rating, comment) => {
-  const product = products.find((product) => {
+  const matchedProduct = products.find((product) => {
     return product.id === productId;
   });
-  const newReview = {
-    id: Math.random().toString(),
-    rating,
-    comment,
-  };
-  product.reviews.push(newReview);
-  return newReview;
+
+  if (matchedProduct) {
+    const newReview = {
+      id: Math.random().toString(),
+      rating,
+      comment,
+    };
+    matchedProduct.reviews.push(newReview);
+    return newReview;
+  }
 };
 
 module.exports = {
